@@ -1,0 +1,15 @@
+{
+  "name": "BBQ Meat Calculator",
+  "short_name": "BBQCalc",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a0f0b",
+  "theme_color": "#e74c3c",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ]
+}

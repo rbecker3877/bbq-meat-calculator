@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="flame" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ff6a00"/>
+      <stop offset="100%" stop-color="#ff0000"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#flame)" d="M32 4c6 10 2 14 10 20 6 5 8 10 8 16 0 12-10 20-18 20S14 52 14 40c0-6 2-11 8-16 8-6 4-10 10-20z"/>
+</svg>
