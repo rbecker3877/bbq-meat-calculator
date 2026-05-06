@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BBQ Meat Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-clean">
+  <div class="app-container">
+    <header class="app-header">
+      <div class="app-title">BBQ Meat Calculator</div>
+      <div class="header-controls">
+        <label class="theme-label">
+          Theme:
+          <select id="themeSelect">
+            <option value="theme-clean">Clean</option>
+            <option value="theme-bbq">BBQ</option>
+            <option value="theme-dark">Dark</option>
+          </select>
+        </label>
+      </div>
+    </header>
+
+    <nav class="mode-tabs">
+      <button id="tabSimple" class="tab-button active">Simple Mode</button>
+      <button id="tabAdvanced" class="tab-button">Advanced Mode</button>
+    </nav>
+
+    <!-- SIMPLE MODE -->
+    <section id="simpleMode" class="mode-panel active">
+      <div class="panel-section">
+        <h2>Simple Mode</h2>
+
+        <div class="field-row">
+          <label>Total people</label>
+          <input type="number" id="simplePeople" min="1" value="200">
+        </div>
+
+        <div class="field-row two-col">
+          <div>
+            <label>Pork %</label>
+            <input type="number" id="simplePorkPct" min="0" max="100" value="60">
+          </div>
+          <div>
+            <label>Chicken %</label>
+            <input type="number" id="simpleChickenPct" min="0" max="100" value="40">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <label>Cooked meat per person (lb)</label>
+          <input type="number" id="simpleServing" step="0.01" min="0" value="0.75">
+        </div>
+
+        <div class="field-row">
+          <label class="checkbox-row">
+            <input type="checkbox" id="simpleCrowdPreset" checked>
+            <span>60/40 Crowd Profile (60% pork, 40% chicken, buffet‑tuned)</span>
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label>Buffer (%)</label>
+          <input type="range" id="simpleBuffer" min="0" max="30" value="10">
+          <div class="range-value"><span id="simpleBufferValue">10</span>% extra</div>
+        </div>
+
+        <div class="field-row">
+          <label>Side dish load</label>
+          <select id="simpleSides">
+            <option value="0">None (0%)</option>
+            <option value="0.20" selected>Medium (20%)</option>
+            <option value="0.30">Heavy (30%)</option>
+          </select>
+          <div class="hint-text">
+            Medium = typical buffet with several sides. Heavy = full spread with many sides.
+          </div>
+        </div>
+
+        <button id="simpleCalcBtn" class="primary-button">Calculate</button>
+      </div>
+
+      <div class="panel-section results-section">
+        <h3>Results</h3>
+        <div id="simpleResults" class="results-box"></div>
+      </div>
+    </section>
+
+    <!-- ADVANCED MODE -->
+    <section id="advancedMode" class="mode-panel">
+      <div class="panel-section">
+        <h2>Advanced Mode</h2>
+
+        <div class="field-row">
+          <label>Total people</label>
+          <input type="number" id="advPeople" min="1" value="200">
+        </div>
+
+        <div class="field-row">
+          <label class="checkbox-row">
+            <input type="checkbox" id="advCrowdPreset">
+            <span>60/40 Crowd Profile (60% pork, 40% chicken, buffet‑tuned)</span>
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label class="checkbox-row">
+            <input type="checkbox" id="advStandardPreset">
+            <span>Standard BBQ Profile (balanced split, 0.5–0.75 lb/person)</span>
+          </label>
+        </div>
+
+        <h3>Meat split (%)</h3>
+        <div class="field-row two-col">
+          <div>
+            <label>Pork %</label>
+            <input type="number" id="advPorkPct" min="0" max="100" value="50">
+          </div>
+          <div>
+            <label>Chicken %</label>
+            <input type="number" id="advChickenPct" min="0" max="100" value="30">
+          </div>
+        </div>
+        <div class="field-row two-col">
+          <div>
+            <label>Brisket %</label>
+            <input type="number" id="advBrisketPct" min="0" max="100" value="15">
+          </div>
+          <div>
+            <label>Ribs %</label>
+            <input type="number" id="advRibsPct" min="0" max="100" value="5">
+          </div>
+        </div>
+        <div class="hint-text">Total should be near 100%. Calculator will normalize if slightly off.</div>
+
+        <h3>Serving sizes (cooked)</h3>
+        <div class="field-row two-col">
+          <div>
+            <label>Pork per eater (lb)</label>
+            <input type="number" id="advPorkServing" step="0.01" min="0" value="0.55">
+          </div>
+          <div>
+            <label>Chicken per eater (lb)</label>
+            <input type="number" id="advChickenServing" step="0.01" min="0" value="0.50">
+          </div>
+        </div>
+        <div class="field-row two-col">
+          <div>
+            <label>Brisket per eater (lb)</label>
+            <input type="number" id="advBrisketServing" step="0.01" min="0" value="0.65">
+          </div>
+          <div>
+            <label>Rib bones per eater</label>
+            <input type="number" id="advRibBones" step="1" min="1" value="5">
+          </div>
+        </div>
+
+        <h3>Yields & ribs</h3>
+        <div class="field-row two-col">
+          <div>
+            <label>Pork yield</label>
+            <input type="number" id="advPorkYield" step="0.01" min="0.1" max="1" value="0.55">
+          </div>
+          <div>
+            <label>Chicken yield</label>
+            <input type="number" id="advChickenYield" step="0.01" min="0.1" max="1" value="0.78">
+          </div>
+        </div>
+        <div class="field-row two-col">
+          <div>
+            <label>Brisket yield</label>
+            <input type="number" id="advBrisketYield" step="0.01" min="0.1" max="1" value="0.50">
+          </div>
+          <div>
+            <label>Rib rack weight (lb raw)</label>
+            <input type="number" id="advRibRackWeight" step="0.1" min="1" value="2.75">
+          </div>
+        </div>
+
+        <h3>Buffers & sides</h3>
+        <div class="field-row">
+          <label>Global buffer (%)</label>
+          <input type="range" id="advBuffer" min="0" max="30" value="15">
+          <div class="range-value"><span id="advBufferValue">15</span>% extra</div>
+        </div>
+
+        <div class="field-row">
+          <label>Number of meaningful sides (0–6)</label>
+          <input type="range" id="advSides" min="0" max="6" value="4">
+          <div class="range-value">
+            <span id="advSidesValue">4</span> sides → <span id="advSidesReductionValue">24</span>% reduction
+          </div>
+          <div class="hint-text">
+            Each side reduces meat by ~6%, capped at 30%. Use this for precise buffet tuning.
+          </div>
+        </div>
+
+        <button id="advCalcBtn" class="primary-button">Calculate</button>
+      </div>
+
+      <div class="panel-section results-section">
+        <h3>Results</h3>
+        <div id="advResults" class="results-box"></div>
+
+        <h3>Shopping list summary</h3>
+        <div id="advSummary" class="results-box"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./service-worker.js");
+    }
+  </script>
+</body>
+</html>
